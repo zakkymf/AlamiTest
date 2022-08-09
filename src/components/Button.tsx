@@ -1,13 +1,13 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-import Colors from '../theme/Colors';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Colors, Fonts } from '../theme/';
 
 interface ButtonProps {
   label: string;
   onPress: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({label, onPress}) => {
+const Button: React.FC<ButtonProps> = ({ label, onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.label}>{label}</Text>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 12,
     color: Colors.white,
-    fontWeight: 'bold',
+    fontFamily: Fonts.type.monserratDemi,
   },
 });
 
