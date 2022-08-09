@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { Alert } from 'react-native';
 import API from '../config/Api';
 
 interface SellerState {
@@ -41,11 +42,19 @@ const sellerSlice = createSlice({
   },
 });
 
-export const addSeller = createAsyncThunk('addSeller', async (data: any) => {
-  console.log(data);
+export const addSeller = createAsyncThunk('addSeller', async (params: any) => {
+  const data = {
+    nama: params.nama,
+    kota: params.kota,
+  };
   const response = await axios.post(API.addSeller, data);
-  console.log(response);
-  return response?.data;
+  console.log('add seller response', response);
+  if (response?.data?.code === 200) {
+    params.navigation.navigate('AddProduct');
+    return response?.data;
+  } else {
+    Alert.alert('Terjadi Kesalahan', response?.data?.message);
+  }
 });
 
 export const { setName, setCity } = sellerSlice.actions;

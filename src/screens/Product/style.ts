@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    justifyContent: 'center',
     backgroundColor: Colors.lightblue,
   },
   card: {
@@ -29,6 +28,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 15,
     fontFamily: Fonts.type.monserratBold,
+  },
+  row: {
+    width: '100%',
+    flexDirection: 'row',
+  },
+  input: {
+    width: '70%',
+    marginRight: 20,
+  },
+  inputSatuan: {
+    flex: 1,
+  },
+  search: {
+    width: '100%',
+    paddingLeft: 10,
+    borderRadius: 12,
+    backgroundColor: Colors.white,
   },
 });
 
