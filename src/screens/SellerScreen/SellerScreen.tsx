@@ -4,12 +4,12 @@ import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import {RootState} from '../../store';
-import {setCity, setName} from '../../store/SellerStore';
+import {AppDispatch, RootState} from '../../store';
+import {addSeller, setCity, setName} from '../../store/SellerStore';
 import styles from './style';
 
 const SellerScreen = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const sellerState = useSelector((state: RootState) => state.sellerReducer);
 
   const onChangeName = (name: string) => {
@@ -20,22 +20,26 @@ const SellerScreen = () => {
     dispatch(setCity(city));
   };
 
+  const onAddSeller = () => {
+    dispatch(addSeller({nama: sellerState.nama, kota: sellerState.kota}));
+  };
+
   return (
     <View style={styles.container}>
       <Input
         label="Nama"
-        value={sellerState.name}
+        value={sellerState.nama}
         placeholder="Masukkan Nama Penjual"
         onChangeText={onChangeName}
       />
       <Input
         label="Kota"
-        value={sellerState.city}
+        value={sellerState.kota}
         placeholder="Masukkan Kota Penjual"
         onChangeText={onChangeCity}
       />
 
-      <Button label="Tambah Penjual" onPress={() => null} />
+      <Button label="Tambah Penjual" onPress={onAddSeller} />
     </View>
   );
 };
