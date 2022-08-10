@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Button from '../../components/Button';
@@ -28,26 +28,28 @@ const SellerScreen = ({ navigation }: any) => {
   const disabled = sellerState.nama == '' || sellerState.kota == '' ? true : false;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.title}>Tambah Penjual</Text>
-        <Input
-          label="Nama"
-          value={sellerState.nama}
-          placeholder="Masukkan Nama Penjual"
-          onChangeText={onChangeName}
-        />
-        <Input
-          label="Kota"
-          value={sellerState.kota}
-          placeholder="Masukkan Kota Penjual"
-          onChangeText={onChangeCity}
-        />
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.card}>
+          <Text style={styles.title}>Tambah Penjual</Text>
+          <Input
+            label="Nama"
+            value={sellerState.nama}
+            placeholder="Masukkan Nama Penjual"
+            onChangeText={onChangeName}
+          />
+          <Input
+            label="Kota"
+            value={sellerState.kota}
+            placeholder="Masukkan Kota Penjual"
+            onChangeText={onChangeCity}
+          />
 
-        <Button disabled={disabled} label="Tambah Penjual" onPress={onAddSeller} />
+          <Button disabled={disabled} label="Tambah Penjual" onPress={onAddSeller} />
+        </View>
+        <Toast />
       </View>
-      <Toast />
-    </View>
+    </SafeAreaView>
   );
 };
 

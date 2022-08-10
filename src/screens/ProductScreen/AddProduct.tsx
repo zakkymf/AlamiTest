@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -42,7 +42,7 @@ const AddProduct = ({ navigation }: any) => {
       : false;
 
   return (
-    <>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.card}>
           <Text style={styles.title}>Tambah Product</Text>
@@ -86,7 +86,7 @@ const AddProduct = ({ navigation }: any) => {
         </View>
       </View>
       <Toast />
-    </>
+    </SafeAreaView>
   );
 };
 

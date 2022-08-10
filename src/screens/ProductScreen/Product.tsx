@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { View, Text, FlatList, TextInput } from 'react-native';
+import { View, Text, FlatList, TextInput, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import List from '../../components/List';
 import { AppDispatch, RootState } from '../../store';
@@ -35,21 +35,23 @@ const Product = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.search}
-        placeholder="Cari Produk"
-        value={productState.search}
-        onFocus={onFocus}
-      />
-      <FlatList
-        style={styles.list}
-        data={productState.data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item?.id?.toString()}
-      />
-      <Toast />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.search}
+          placeholder="Cari Produk"
+          value={productState.search}
+          onFocus={onFocus}
+        />
+        <FlatList
+          style={styles.list}
+          data={productState.data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item?.id?.toString()}
+        />
+        <Toast />
+      </View>
+    </SafeAreaView>
   );
 };
 

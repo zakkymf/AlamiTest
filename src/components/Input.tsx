@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.type.monserrat,
   },
   input: {
+    height: 40,
     marginTop: 5,
     width: '100%',
     borderBottomWidth: 0.5,

@@ -2,6 +2,9 @@ import { Platform, StyleSheet } from 'react-native';
 import { Colors, Fonts } from '../../theme';
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     padding: 16,

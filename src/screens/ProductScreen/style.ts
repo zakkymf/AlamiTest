@@ -2,6 +2,9 @@ import { Platform, StyleSheet } from 'react-native';
 import { Colors, Fonts } from '../../theme';
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     padding: 16,
@@ -41,6 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   search: {
+    height: 40,
     width: '100%',
     paddingLeft: 10,
     borderRadius: 12,

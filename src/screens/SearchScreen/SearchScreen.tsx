@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { debounce } from 'lodash';
-import { View, TextInput, FlatList, ActivityIndicator } from 'react-native';
+import { View, TextInput, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import List from '../../components/List';
 import { AppDispatch, RootState } from '../../store';
@@ -60,22 +60,24 @@ const SearchScreen = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        ref={inputRef}
-        style={styles.search}
-        placeholder="Cari Produk"
-        value={searchState.search}
-        onChangeText={onChangeText}
-      />
-      <FlatList
-        style={styles.list}
-        data={searchState.data}
-        renderItem={renderItem}
-        ListFooterComponent={renderFooter}
-        keyExtractor={(item) => item?.id?.toString()}
-      />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <TextInput
+          ref={inputRef}
+          style={styles.search}
+          placeholder="Cari Produk"
+          value={searchState.search}
+          onChangeText={onChangeText}
+        />
+        <FlatList
+          style={styles.list}
+          data={searchState.data}
+          renderItem={renderItem}
+          ListFooterComponent={renderFooter}
+          keyExtractor={(item) => item?.id?.toString()}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
