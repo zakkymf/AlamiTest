@@ -3,38 +3,42 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import API from '../config/Api';
 
-interface ProductState {
+interface SearchState {
   loading: boolean;
   data: any;
   search: string;
 }
 
-const initialState: ProductState = {
+const initialState: SearchState = {
   data: null,
   search: '',
   loading: false,
 };
 
-const productSlice = createSlice({
+const searchSlice = createSlice({
   name: 'productSlice',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(getProduct.pending, (state) => {
+    builder.addCase(search.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getProduct.fulfilled, (state, action) => {
+    builder.addCase(search.fulfilled, (state, action) => {
       state.data = action.payload;
       state.loading = false;
     });
-    builder.addCase(getProduct.rejected, (state) => {
+    builder.addCase(search.rejected, (state) => {
       state.loading = false;
     });
   },
 });
 
-export const getProduct = createAsyncThunk('getProduct', async (sellerId: number) => {
-  const response = await axios.get(`${API.getProduct}?seller_id=${sellerId}`);
+export const search = createAsyncThunk('searchProduct', async (query: string) => {
+  const response = await axios.get(`${API.search}?keyword=${query}`);
   if (response?.data?.code === 200) {
     return response?.data?.data;
   } else {
@@ -42,4 +46,5 @@ export const getProduct = createAsyncThunk('getProduct', async (sellerId: number
   }
 });
 
-export default productSlice.reducer;
+export const { setSearch } = searchSlice.actions;
+export default searchSlice.reducer;
