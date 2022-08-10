@@ -22,6 +22,9 @@ const searchSlice = createSlice({
     setSearch: (state, action) => {
       state.search = action.payload;
     },
+    setData: (state, action) => {
+      state.data = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(search.pending, (state) => {
@@ -46,5 +49,5 @@ export const search = createAsyncThunk('searchProduct', async (query: string) =>
   }
 });
 
-export const { setSearch } = searchSlice.actions;
+export const { setSearch, setData } = searchSlice.actions;
 export default searchSlice.reducer;

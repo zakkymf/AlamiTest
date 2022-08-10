@@ -33,50 +33,60 @@ const AddProduct = ({ navigation }: any) => {
     dispatch(addProduct(params));
   };
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.title}>Tambah Product</Text>
-        <Input
-          editable={false}
-          label="ID Penjual"
-          keyboardType="numeric"
-          value={sellerState?.data?.data?.id.toString()}
-        />
-        <Input
-          label="Nama"
-          value={addProductState.nama}
-          placeholder="Masukkan Nama Produk"
-          onChangeText={(value) => onChangeText('nama', value)}
-        />
-        <View style={styles.row}>
-          <Input
-            label="Harga Satuan"
-            value={addProductState.harga}
-            placeholder="Masukkan Harga"
-            keyboardType="numeric"
-            containerStyle={styles.input}
-            onChangeText={(value) => onChangeText('harga', value)}
-          />
-          <Input
-            label="Satuan"
-            value={addProductState.satuan}
-            placeholder="kg"
-            containerStyle={styles.inputSatuan}
-            onChangeText={(value) => onChangeText('satuan', value)}
-          />
-        </View>
-        <Input
-          label="Deskripsi"
-          value={addProductState.deskripsi}
-          placeholder="Masukkan Deskripsi Produk"
-          onChangeText={(value) => onChangeText('deskripsi', value)}
-        />
+  const disabled =
+    addProductState.nama == '' ||
+    addProductState.harga == '' ||
+    addProductState.satuan == '' ||
+    addProductState.deskripsi == ''
+      ? true
+      : false;
 
-        <Button label="Tambah Product" onPress={onAddProduct} />
+  return (
+    <>
+      <View style={styles.container}>
+        <View style={styles.card}>
+          <Text style={styles.title}>Tambah Product</Text>
+          <Input
+            editable={false}
+            label="ID Penjual"
+            keyboardType="numeric"
+            value={sellerState?.data?.data?.id.toString()}
+          />
+          <Input
+            label="Nama"
+            value={addProductState.nama}
+            placeholder="Masukkan Nama Produk"
+            onChangeText={(value) => onChangeText('nama', value)}
+          />
+          <View style={styles.row}>
+            <Input
+              label="Harga Satuan"
+              value={addProductState.harga}
+              placeholder="Masukkan Harga"
+              keyboardType="numeric"
+              containerStyle={styles.input}
+              onChangeText={(value) => onChangeText('harga', value)}
+            />
+            <Input
+              label="Satuan"
+              value={addProductState.satuan}
+              placeholder="kg"
+              containerStyle={styles.inputSatuan}
+              onChangeText={(value) => onChangeText('satuan', value)}
+            />
+          </View>
+          <Input
+            label="Deskripsi"
+            value={addProductState.deskripsi}
+            placeholder="Masukkan Deskripsi Produk"
+            onChangeText={(value) => onChangeText('deskripsi', value)}
+          />
+
+          <Button disabled={disabled} label="Tambah Product" onPress={onAddProduct} />
+        </View>
       </View>
       <Toast />
-    </View>
+    </>
   );
 };
 

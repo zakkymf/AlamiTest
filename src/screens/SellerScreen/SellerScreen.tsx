@@ -25,6 +25,8 @@ const SellerScreen = ({ navigation }: any) => {
     dispatch(addSeller({ nama: sellerState.nama, kota: sellerState.kota, navigation }));
   };
 
+  const disabled = sellerState.nama == '' || sellerState.kota == '' ? true : false;
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -42,7 +44,7 @@ const SellerScreen = ({ navigation }: any) => {
           onChangeText={onChangeCity}
         />
 
-        <Button label="Tambah Penjual" onPress={onAddSeller} />
+        <Button disabled={disabled} label="Tambah Penjual" onPress={onAddSeller} />
       </View>
       <Toast />
     </View>

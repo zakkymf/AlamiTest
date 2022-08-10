@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import List from '../../components/List';
 import { AppDispatch, RootState } from '../../store';
 import { getProduct } from '../../store/ProductStore';
+import { setData, setSearch } from '../../store/SearchStore';
+import Toast from 'react-native-toast-message';
 import styles from './style';
 
 const Product = ({ navigation }: any) => {
@@ -28,6 +30,8 @@ const Product = ({ navigation }: any) => {
 
   const onFocus = () => {
     navigation.navigate('SearchScreen');
+    dispatch(setSearch(''));
+    dispatch(setData(null));
   };
 
   return (
@@ -44,6 +48,7 @@ const Product = ({ navigation }: any) => {
         renderItem={renderItem}
         keyExtractor={(item) => item?.id?.toString()}
       />
+      <Toast />
     </View>
   );
 };

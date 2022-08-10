@@ -60,7 +60,7 @@ export const addProduct = createAsyncThunk('addProduct', async (params: any) => 
     Toast.show({
       type: 'success',
       text1: 'Berhasil',
-      text2: 'Sukses menambahkan Seller',
+      text2: 'Sukses menambahkan Produk',
     });
     return response?.data?.data;
   } else {
