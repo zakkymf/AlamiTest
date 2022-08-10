@@ -37,9 +37,17 @@ const productSlice = createSlice({
   },
 });
 
-export const getProduct = createAsyncThunk('getProduct', async (params: any) => {
-  const response = await axios.get(`${API.getProduct}?seller_id=${params?.id}`);
-  console.log(response);
+export const getProduct = createAsyncThunk('getProduct', async (sellerId: number) => {
+  const response = await axios.get(`${API.getProduct}?seller_id=${sellerId}`);
+  if (response?.data?.code === 200) {
+    return response?.data?.data;
+  } else {
+    Alert.alert('Terjadi Kesalahan', response?.data?.message);
+  }
+});
+
+export const search = createAsyncThunk('searchProduct', async (query: string) => {
+  const response = await axios.get(`${API.search}?keyword=${query}`);
   if (response?.data?.code === 200) {
     return response?.data?.data;
   } else {

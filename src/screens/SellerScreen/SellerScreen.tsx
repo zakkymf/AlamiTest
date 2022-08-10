@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { AppDispatch, RootState } from '../../store';
 import { addSeller, setCity, setName } from '../../store/SellerStore';
+import Toast from 'react-native-toast-message';
 import styles from './style';
 
 const SellerScreen = ({ navigation }: any) => {
@@ -43,6 +44,7 @@ const SellerScreen = ({ navigation }: any) => {
 
         <Button label="Tambah Penjual" onPress={onAddSeller} />
       </View>
+      <Toast />
     </View>
   );
 };

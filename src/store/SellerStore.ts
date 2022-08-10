@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Alert } from 'react-native';
+import Toast from 'react-native-toast-message';
 import API from '../config/Api';
 
 interface SellerState {
@@ -48,9 +49,13 @@ export const addSeller = createAsyncThunk('addSeller', async (params: any) => {
     kota: params.kota,
   };
   const response = await axios.post(API.addSeller, data);
-  console.log('add seller response', response);
   if (response?.data?.code === 200) {
     params.navigation.navigate('AddProduct');
+    Toast.show({
+      type: 'success',
+      text1: 'Berhasil',
+      text2: 'Sukses menambahkan Seller',
+    });
     return response?.data;
   } else {
     Alert.alert('Terjadi Kesalahan', response?.data?.message);

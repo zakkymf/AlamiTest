@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { AppDispatch, RootState } from '../../store';
 import { addProduct, setState } from '../../store/AddProductStore';
+import Toast from 'react-native-toast-message';
 import styles from './style';
 
 const AddProduct = ({ navigation }: any) => {
   const dispatch = useDispatch<AppDispatch>();
   const addProductState = useSelector((state: RootState) => state.addProductReducer);
+  const sellerState = useSelector((state: RootState) => state.sellerReducer);
 
   const onChangeText = (key: string, value: string) => {
     const params = {
@@ -21,7 +23,7 @@ const AddProduct = ({ navigation }: any) => {
 
   const onAddProduct = () => {
     const params = {
-      id: addProductState.id,
+      id: sellerState?.data?.data?.id,
       nama: addProductState.nama,
       deskripsi: addProductState.deskripsi,
       harga: addProductState.harga,
@@ -36,11 +38,10 @@ const AddProduct = ({ navigation }: any) => {
       <View style={styles.card}>
         <Text style={styles.title}>Tambah Product</Text>
         <Input
+          editable={false}
           label="ID Penjual"
           keyboardType="numeric"
-          value={addProductState.id}
-          placeholder="Masukkan ID Penjual"
-          onChangeText={(value) => onChangeText('id', value)}
+          value={sellerState?.data?.data?.id.toString()}
         />
         <Input
           label="Nama"
@@ -74,6 +75,7 @@ const AddProduct = ({ navigation }: any) => {
 
         <Button label="Tambah Product" onPress={onAddProduct} />
       </View>
+      <Toast />
     </View>
   );
 };

@@ -1,22 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { View, Text, FlatList, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import List from '../../components/List';
 import { AppDispatch, RootState } from '../../store';
-import { getProduct, setSearch } from '../../store/ProductStore';
+import { getProduct, search, setSearch } from '../../store/ProductStore';
+import { debounce } from 'lodash';
 import styles from './style';
 
-const Product = ({ route }: any) => {
+const Product = () => {
   const dispatch = useDispatch<AppDispatch>();
   const productState = useSelector((state: RootState) => state.productReducer);
   const addProductState = useSelector((state: RootState) => state.addProductReducer);
-  console.log(addProductState);
 
   useEffect(() => {
-    dispatch(getProduct({ id: route?.params?.sellerId }));
-  }, []);
+    dispatch(getProduct(addProductState?.data?.sellerId));
+  }, [addProductState]);
+
+  const searchProduct = (query: string) => {
+    dispatch(search(query));
+  };
+
+  const debSearch = useCallback(
+    debounce((query: string) => {
+      if (query.length > 2) {
+        searchProduct(query);
+      }
+    }, 400),
+    []
+  );
 
   const onChangeText = (value: string) => {
+    debSearch(value);
     dispatch(setSearch(value));
   };
 
@@ -40,6 +54,7 @@ const Product = ({ route }: any) => {
         onChangeText={onChangeText}
       />
       <FlatList
+        style={styles.list}
         data={productState.data}
         renderItem={renderItem}
         keyExtractor={(item) => item?.id?.toString()}

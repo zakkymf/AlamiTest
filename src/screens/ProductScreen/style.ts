@@ -46,6 +46,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: Colors.white,
   },
+  list: {
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 10,
+  },
 });
 
 export default styles;
